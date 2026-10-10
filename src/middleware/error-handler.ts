@@ -22,9 +22,12 @@ export const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
   }
 
   if (err instanceof z.ZodError) {
-    const { fieldErrors } = z.flattenError(err);
+    const { formErrors, fieldErrors } = z.flattenError(err);
     res.status(400).json({
-      error: { message: 'Validation failed', details: fieldErrors as Record<string, string[]> },
+      error: {
+        message: formErrors[0] ?? 'Validation failed',
+        details: fieldErrors as Record<string, string[]>,
+      },
     } satisfies ErrorResponse);
     return;
   }
