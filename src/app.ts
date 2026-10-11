@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import { env } from './config/env';
 import { errorHandler, notFoundHandler } from './middleware/error-handler';
 import { authRouter } from './routes/auth';
+import { categoryRouter } from './routes/category';
 import { expenseRouter } from './routes/expense';
 import { healthRouter } from './routes/health';
 
@@ -16,6 +17,7 @@ app.use(express.json());
 
 app.use('/api/health', healthRouter);
 app.use('/api/auth', authRouter);
+app.use('/api/categories', categoryRouter);
 app.use('/api/expenses', expenseRouter);
 
 app.use(notFoundHandler);
