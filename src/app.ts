@@ -6,6 +6,7 @@ import { errorHandler, notFoundHandler } from './middleware/error-handler';
 import { authRouter } from './routes/auth';
 import { budgetRouter } from './routes/budget';
 import { categoryRouter } from './routes/category';
+import { dashboardRouter } from './routes/dashboard';
 import { expenseRouter } from './routes/expense';
 import { healthRouter } from './routes/health';
 
@@ -21,6 +22,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/categories', categoryRouter);
 app.use('/api/expenses', expenseRouter);
 app.use('/api/budgets', budgetRouter);
+app.use('/api/dashboard', dashboardRouter);
 
 app.use(notFoundHandler);
 app.use(errorHandler);

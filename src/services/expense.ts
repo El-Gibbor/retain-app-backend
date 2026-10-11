@@ -6,7 +6,7 @@ import type { Paginated } from '../types/pagination';
 import { formatDateOnly, parseDateOnly } from '../utils/date';
 import { HttpError } from '../utils/http-error';
 
-const withCategory = { category: { select: { id: true, name: true } } } as const;
+export const withCategory = { category: { select: { id: true, name: true } } } as const;
 
 type ExpenseWithCategory = Expense & { category: Pick<Category, 'id' | 'name'> };
 

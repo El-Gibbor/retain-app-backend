@@ -10,3 +10,5 @@ export const monthRange = (month: string): { start: Date; end: Date } => {
   end.setUTCMonth(end.getUTCMonth() + 1);
   return { start, end };
 };
+
+export const currentMonth = (): string => new Date().toISOString().slice(0, 7);
