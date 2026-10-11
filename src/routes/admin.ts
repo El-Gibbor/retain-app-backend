@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { requireAdmin, requireAuth } from '../middleware/auth';
 import { categoryInputSchema } from '../schemas/category';
+import { getAdminInsights } from '../services/admin';
 import { createCategory, deleteCategory, renameCategory } from '../services/category';
 import { parseIdParam } from '../utils/params';
 
@@ -19,4 +20,8 @@ adminRouter.patch('/categories/:id', async (req, res) => {
 
 adminRouter.delete('/categories/:id', async (req, res) => {
   res.json(await deleteCategory(parseIdParam(req, 'Category')));
+});
+
+adminRouter.get('/insights', async (_req, res) => {
+  res.json(await getAdminInsights());
 });
