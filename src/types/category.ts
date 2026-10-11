@@ -3,3 +3,9 @@ export interface CategoryDto {
   name: string;
   isDefault: boolean;
 }
+
+export interface CategoryDeletionResult {
+  deletedId: string;
+  reassignedExpenses: number;
+  reassignedTo: CategoryDto;
+}

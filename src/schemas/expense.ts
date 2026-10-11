@@ -64,8 +64,6 @@ export const listExpensesQuerySchema = z
     path: ['minAmount'],
   });
 
-export const idParamSchema = z.object({ id: z.uuid() });
-
 export type CreateExpenseInput = z.infer<typeof createExpenseSchema>;
 export type UpdateExpenseInput = z.infer<typeof updateExpenseSchema>;
 export type ListExpensesQuery = z.infer<typeof listExpensesQuerySchema>;

@@ -3,6 +3,7 @@ import express from 'express';
 import helmet from 'helmet';
 import { env } from './config/env';
 import { errorHandler, notFoundHandler } from './middleware/error-handler';
+import { adminRouter } from './routes/admin';
 import { authRouter } from './routes/auth';
 import { budgetRouter } from './routes/budget';
 import { categoryRouter } from './routes/category';
@@ -23,6 +24,7 @@ app.use('/api/categories', categoryRouter);
 app.use('/api/expenses', expenseRouter);
 app.use('/api/budgets', budgetRouter);
 app.use('/api/dashboard', dashboardRouter);
+app.use('/api/admin', adminRouter);
 
 app.use(notFoundHandler);
 app.use(errorHandler);
