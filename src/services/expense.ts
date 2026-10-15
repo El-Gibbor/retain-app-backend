@@ -77,7 +77,8 @@ export async function listExpenses(
   const { sortBy, sortOrder, page, limit } = query;
   const where = buildWhere(userId, query);
 
-  const [total, expenses] = await prisma.$transaction([
+  // Read-only, so two parallel queries avoid the BEGIN/COMMIT round trips of a transaction
+  const [total, expenses] = await Promise.all([
     prisma.expense.count({ where }),
     prisma.expense.findMany({
       where,
