@@ -13,6 +13,9 @@ import { healthRouter } from './routes/health';
 
 export const app = express();
 
+// Render sits behind one proxy; this lets rate limiting see the real client IP
+app.set('trust proxy', 1);
+
 app.use(helmet());
 // CLIENT_ORIGIN can hold several comma-separated origins
 app.use(cors({ origin: env.CLIENT_ORIGIN.split(',').map((o) => o.trim()) }));
