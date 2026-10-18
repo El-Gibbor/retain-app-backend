@@ -10,6 +10,12 @@ export interface ErrorResponse {
   };
 }
 
+// Drops fields without messages so the response matches ErrorResponse exactly
+const toFieldMessages = (fieldErrors: Record<string, string[] | undefined>): Record<string, string[]> =>
+  Object.fromEntries(
+    Object.entries(fieldErrors).filter((entry): entry is [string, string[]] => Array.isArray(entry[1])),
+  );
+
 export const notFoundHandler: RequestHandler = (req, res) => {
   const body: ErrorResponse = { error: { message: `Route ${req.method} ${req.path} not found` } };
   res.status(404).json(body);
@@ -26,7 +32,7 @@ export const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
     res.status(400).json({
       error: {
         message: formErrors[0] ?? 'Validation failed',
-        details: fieldErrors as Record<string, string[]>,
+        details: toFieldMessages(fieldErrors),
       },
     } satisfies ErrorResponse);
     return;
