@@ -13,7 +13,7 @@ const envSchema = z.object({
 // Stop the server if required env vars are missing or invalid
 const parsed = envSchema.safeParse(process.env);
 if (!parsed.success) {
-  console.error('Invalid environment variables:', z.treeifyError(parsed.error));
+  console.error('Invalid environment variables:', z.flattenError(parsed.error).fieldErrors);
   process.exit(1);
 }
 
